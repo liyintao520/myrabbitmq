@@ -14,7 +14,7 @@ public class Recv {
 
 	private static final String QUEUE_NAME="test_queue_confirm3";
 	
-	
+	// 测试
 	public static void main(String[] args) throws IOException, TimeoutException {
 		
 		Connection connection = ConnectionUtils.getConnection();
