@@ -5,7 +5,8 @@ package com.threadlocal.test;
  *     https://github.com/love-somnus/SpringBoot/blob/master/SpringBoot-00-J2SE/src/test/java/com/somnus/thread/threadlocal/ThreadLocal1Test.java
  */
 public class ThreadLocal1Test {
-    // 创建一个Integer型的线程本地变量
+//    程序员希望线程局部变量具有初始值必须为此方法被重写。通常情况下，将使用匿名内部类。
+    // 创建一个Integer型的线程本地变量，并重写该方法initialValue() 设置初始化值
     public static final ThreadLocal<Integer> container = new ThreadLocal<Integer>() {
         @Override
         protected Integer initialValue() {
@@ -30,7 +31,13 @@ public class ThreadLocal1Test {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        ThreadLocal1Test test = new ThreadLocal1Test();
-        test.execute();
+        try {
+            ThreadLocal1Test test = new ThreadLocal1Test();
+            test.execute();
+        } catch (Exception e) {
+            System.out.println("定义的时候这个值是container = " + container);
+        } finally {
+            System.out.println("必须实例化重写内部方法initialValue()  不重写该方法的话，默认返回的是null，请看源码!!!");
+        }
     }
 }
